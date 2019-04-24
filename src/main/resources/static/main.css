@@ -1,0 +1,57 @@
+img.icon-xxs, img.icon-xxs-r {
+    width: 1rem;
+    height: 1rem;
+    display: inline;
+}
+
+img.icon-xs, img.icon-xs-r {
+    width: 2rem;
+    height: 2rem;
+    display: inline;
+}
+
+img.icon-sm, img.icon-sm-r {
+    width: 4rem;
+    height: 4rem;
+}
+
+img.icon-md, img.icon-md-r {
+    width: 8rem;
+    height: 8rem;
+}
+
+img.icon-lg, img.icon-lg-r {
+    width: 12rem;
+    height: 12rem;
+}
+
+img.icon-xl, img.icon-xl-r,img.icon-xl-sq{
+    width: 16rem;
+    height: 16rem;
+}
+
+img.icon-xs-r, img.icon-xxs-r,
+img.icon-sm-r, img.icon-md-r,
+img.icon-lg-r, img.icon-xl-r {
+    border-radius: 50%;
+}
+
+img.icon-xxs, img.icon-xs,
+img.icon-sm,img.icon-md,
+img.icon-lg,img.icon-xl {
+    border-radius: 5%;
+}
+
+img.icon-xxs, img.icon-xxs-r,
+img.icon-xs, img.icon-xs-r,
+img.icon-sm, img.icon-sm-r,
+img.icon-md, img.icon-md-r,
+img.icon-lg, img.icon-lg-r,
+img.icon-xl, img.icon-xl-r,img.icon-xl-sq {
+    object-fit: cover;
+    display: inline-block;
+}
+
+.search-el {
+    cursor: pointer;
+}
