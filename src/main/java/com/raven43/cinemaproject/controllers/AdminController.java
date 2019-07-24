@@ -3,12 +3,8 @@ package com.raven43.cinemaproject.controllers;
 import com.raven43.cinemaproject.model.Film;
 import com.raven43.cinemaproject.model.Person;
 import com.raven43.cinemaproject.model.User;
-import com.raven43.cinemaproject.model.dto.RoleMapper;
-import com.raven43.cinemaproject.repo.FilmRepo;
-import com.raven43.cinemaproject.repo.PersonRepo;
-import com.raven43.cinemaproject.repo.UserRepo;
-import com.raven43.cinemaproject.repo.comment.TopicRepo;
-import com.raven43.cinemaproject.services.FileService;
+import com.raven43.cinemaproject.services.admin.ContentAdministrationService;
+import com.raven43.cinemaproject.services.admin.UserAdministrationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.io.IOException;
+
+import static java.util.Objects.nonNull;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,12 +24,8 @@ import java.io.IOException;
 @Slf4j
 public class AdminController {
 
-    private final FilmRepo filmRepo;
-    private final PersonRepo personRepo;
-    private final FileService fileService;
-    private final UserRepo userRepo;
-    private final RoleMapper roleMapper;
-    private final TopicRepo topicRepo;
+    private final ContentAdministrationService contentAdministrationService;
+    private final UserAdministrationService userAdministrationService;
 
     @GetMapping
     public String main() {
@@ -44,7 +37,9 @@ public class AdminController {
             @RequestParam(required = false) Long id,
             ModelAndView modelAndView
     ) {
-        if (id != null) modelAndView.addObject("item", filmRepo.findById(id).orElse(null));
+        if (nonNull(id)) {
+            modelAndView.addObject("item", contentAdministrationService.getFilm(id));
+        }
         modelAndView.setViewName("admin/film");
         return modelAndView;
     }
@@ -55,24 +50,9 @@ public class AdminController {
             @RequestParam(name = "sroles", required = false) String[] roles,
             @RequestParam(required = false) MultipartFile file,
             Model model
-    ) throws IOException {
+    ) {
 
-        if (film.getId() != null) film.setTopic(
-                filmRepo
-                        .findById(film.getId())
-                        .orElseThrow()
-                        .getTopic()
-        );
-
-        if (file != null && !file.isEmpty()) {
-            log.info("new file");
-            String fileName = fileService.upload(file);
-            film.setImgName(fileName);
-        }
-        film = filmRepo.save(film);
-
-        roleMapper.updateFilmRoles(film, roles);
-
+        contentAdministrationService.updateOrCreateFilm(film, roles, file);
         model.addAttribute("message",
                 "Film <a class=\"alert-link\" href=\"/films/" + film.getId() +
                         "\">" + film.getName() + "</a> successfully updated");
@@ -86,7 +66,7 @@ public class AdminController {
             @RequestParam(required = false) Long id,
             Model model
     ) {
-        if (id != null) model.addAttribute("item", personRepo.findById(id).orElse(null));
+        if (nonNull(id)) model.addAttribute("item", contentAdministrationService.getPerson(id));
         return "admin/person";
     }
 
@@ -96,23 +76,9 @@ public class AdminController {
             @RequestParam(name = "sroles", required = false) String[] roles,
             @RequestParam(required = false) MultipartFile file,
             Model model
-    ) throws IOException {
+    ) {
 
-        if (person.getId() != null) person.setTopic(
-                personRepo
-                        .findById(person.getId())
-                        .orElseThrow()
-                        .getTopic()
-        );
-
-        if (file != null && !file.isEmpty()) {
-            String fileName = fileService.upload(file);
-            person.setImgName(fileName);
-        }
-        person = personRepo.save(person);
-
-        roleMapper.updatePersonRoles(person, roles);
-
+        contentAdministrationService.updateOrCreatePerson(person, roles, file);
         model.addAttribute("item", person);
         model.addAttribute("message", "Person <a class=\"alert-link\" href=\"/persons/" + person.getId() + "\">" + person.getName() + "</a> successfully updated");
         return "admin/person";
@@ -124,7 +90,7 @@ public class AdminController {
             Pageable pageable,
             Model model
     ) {
-        model.addAttribute("page", userRepo.getByUsernameContains(str, pageable));
+        model.addAttribute("page", userAdministrationService.getUsers(str, pageable));
         model.addAttribute("str", str);
         return "admin/users";
     }
@@ -132,10 +98,9 @@ public class AdminController {
     @GetMapping("/users/{id}")
     public String getUser(
             @PathVariable Long id,
-            Pageable pageable,
             Model model
     ) {
-        model.addAttribute("item", userRepo.findById(id).orElseThrow());
+        model.addAttribute("item", userAdministrationService.getUser(id));
         return "admin/user";
     }
 
@@ -146,19 +111,9 @@ public class AdminController {
             @RequestParam(required = false, defaultValue = "false") boolean adm,
             Model model
     ) {
-
-        User user = userRepo.findById(id).orElseThrow();
-
-        if (mod) user.getRoles().add(User.Role.MODER);
-        else user.getRoles().remove(User.Role.MODER);
-        if (adm) user.getRoles().add(User.Role.ADMIN);
-        else user.getRoles().remove(User.Role.ADMIN);
-
-        userRepo.save(user);
+        User user = userAdministrationService.editUser(id, mod, adm);
         model.addAttribute("item", user);
         model.addAttribute("message", "User " + user.getUsername() + " updated");
         return "admin/user";
     }
-
-
 }
