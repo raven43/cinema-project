@@ -11,9 +11,8 @@ import com.raven43.cinemaproject.repo.FilmRepo;
 import com.raven43.cinemaproject.repo.PersonRepo;
 import com.raven43.cinemaproject.repo.comment.CommentRepo;
 import com.raven43.cinemaproject.repo.comment.TopicRepo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,26 +24,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequiredArgsConstructor
+@Slf4j
 public class ViewController {
 
-    private final Logger log = LoggerFactory.getLogger(ViewController.class);
     private final FilmRepo filmRepo;
     private final PersonRepo personRepo;
     private final CommentRepo commentRepo;
     private final TopicRepo topicRepo;
-
-    @Autowired
-    public ViewController(
-            FilmRepo filmRepo,
-            PersonRepo personRepo,
-            CommentRepo commentRepo,
-            TopicRepo topicRepo
-    ) {
-        this.filmRepo = filmRepo;
-        this.personRepo = personRepo;
-        this.commentRepo = commentRepo;
-        this.topicRepo = topicRepo;
-    }
 
     @GetMapping("/films")
     public String getFilms(

@@ -26,9 +26,9 @@ public class FileService {
         resultFileName.append(UUID.randomUUID().toString());
         resultFileName.append(".").append(file.getOriginalFilename());
 
-        String result = (resultFileName.length()>128)
-                ?resultFileName.substring(0,127)
-                :resultFileName.toString();
+        String result = (resultFileName.length() > 128)
+                ? resultFileName.substring(0, 127)
+                : resultFileName.toString();
 
         file.transferTo(new File(dir.getAbsolutePath() + "/" + result));
         return result;

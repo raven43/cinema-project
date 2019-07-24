@@ -3,7 +3,7 @@ package com.raven43.cinemaproject.controllers;
 import com.raven43.cinemaproject.model.User;
 import com.raven43.cinemaproject.repo.FilmRepo;
 import com.raven43.cinemaproject.repo.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,19 +15,11 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
     private final UserRepo userRepo;
     private final FilmRepo filmRepo;
-
-    @Autowired
-    public MainController(
-            UserRepo userRepo,
-            FilmRepo filmRepo
-    ) {
-        this.userRepo = userRepo;
-        this.filmRepo = filmRepo;
-    }
 
     @GetMapping("/")
     public String index(

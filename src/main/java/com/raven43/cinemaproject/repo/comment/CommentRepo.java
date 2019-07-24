@@ -8,14 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface CommentRepo extends CustomRepo<Comment,Long> {
+public interface CommentRepo extends CustomRepo<Comment, Long> {
 
     Page<Comment> getByTopic(Topic topic, Pageable pageable);
 
     @Query("select c from Comment c where c.topic = ?1")
-    Page<Comment> getByTopicId(Long id,Pageable pageable);
+    Page<Comment> getByTopicId(Long id, Pageable pageable);
 
 }

@@ -1,6 +1,0 @@
-{
-  "permissions": [
-    "https://en.wikipedia.org/w/api.php",
-    "https://ru.wikipedia.org/w/api.php"
-  ]
-}

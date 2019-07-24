@@ -9,23 +9,24 @@ import com.raven43.cinemaproject.repo.PersonRepo;
 import com.raven43.cinemaproject.repo.UserRepo;
 import com.raven43.cinemaproject.repo.comment.TopicRepo;
 import com.raven43.cinemaproject.services.FileService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
+@RequiredArgsConstructor
+@Slf4j
 public class AdminController {
 
-    private final static Logger log = LoggerFactory.getLogger(AdminController.class);
     private final FilmRepo filmRepo;
     private final PersonRepo personRepo;
     private final FileService fileService;
@@ -33,38 +34,23 @@ public class AdminController {
     private final RoleMapper roleMapper;
     private final TopicRepo topicRepo;
 
-    @Autowired
-    public AdminController(
-            FilmRepo filmRepo,
-            PersonRepo personRepo,
-            FileService fileService,
-            RoleMapper roleMapper,
-            UserRepo userRepo,
-            TopicRepo topicRepo) {
-        this.filmRepo = filmRepo;
-        this.personRepo = personRepo;
-        this.fileService = fileService;
-        this.roleMapper = roleMapper;
-        this.userRepo = userRepo;
-        this.topicRepo = topicRepo;
-    }
-
     @GetMapping
     public String main() {
         return "admin/main";
     }
 
     @GetMapping("/film")
-    public String editFilm(
+    public ModelAndView getEditFilmPage(
             @RequestParam(required = false) Long id,
-            Model model
+            ModelAndView modelAndView
     ) {
-        if (id != null) model.addAttribute("item", filmRepo.findById(id).orElse(null));
-        return "admin/film";
+        if (id != null) modelAndView.addObject("item", filmRepo.findById(id).orElse(null));
+        modelAndView.setViewName("admin/film");
+        return modelAndView;
     }
 
     @PostMapping("/film")
-    public String editFilm(
+    public String postEditFilmPage(
             @Valid Film film,
             @RequestParam(name = "sroles", required = false) String[] roles,
             @RequestParam(required = false) MultipartFile file,

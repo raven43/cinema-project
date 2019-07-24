@@ -16,7 +16,7 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany(targetEntity = User.class,fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinTable(name = "chat_users",
             joinColumns = @JoinColumn(name = "chat_id"),
             inverseJoinColumns = @JoinColumn(name = "users_id"))

@@ -4,9 +4,8 @@ import com.raven43.cinemaproject.model.User;
 import com.raven43.cinemaproject.repo.UserRepo;
 import com.raven43.cinemaproject.services.FileService;
 import com.raven43.cinemaproject.services.MessageService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,24 +18,13 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("/profile")
+@RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserRepo userRepo;
     private final FileService fileService;
     private final MessageService messageService;
-
-
-    @Autowired
-    public UserController(
-            UserRepo userRepo,
-            FileService fileService,
-            MessageService messageService
-    ) {
-        this.userRepo = userRepo;
-        this.fileService = fileService;
-        this.messageService = messageService;
-    }
 
     @GetMapping
     public String profile() {
@@ -127,7 +115,7 @@ public class UserController {
             Pageable pageable,
             Model model
     ) {
-        messageService.handleMessage(user,id,text);
+        messageService.handleMessage(user, id, text);
         model.addAttribute("page", messageService.getChatPage(id, pageable));
         return "user/dialog";
     }

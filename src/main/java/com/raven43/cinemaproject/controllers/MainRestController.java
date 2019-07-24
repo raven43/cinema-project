@@ -6,7 +6,7 @@ import com.raven43.cinemaproject.model.Role;
 import com.raven43.cinemaproject.repo.FilmRepo;
 import com.raven43.cinemaproject.repo.PersonRepo;
 import com.raven43.cinemaproject.repo.RoleRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -16,18 +16,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/rest")
+@RequiredArgsConstructor
 public class MainRestController {
 
     private final FilmRepo filmRepo;
     private final PersonRepo personRepo;
     private final RoleRepo roleRepo;
-
-    @Autowired
-    public MainRestController(FilmRepo filmRepo, PersonRepo personRepo, RoleRepo roleRepo) {
-        this.filmRepo = filmRepo;
-        this.personRepo = personRepo;
-        this.roleRepo = roleRepo;
-    }
 
     @GetMapping("/films")
     public Iterable<Film> getFilms(
@@ -58,6 +52,7 @@ public class MainRestController {
         personRepo.save(person);
         return HttpStatus.OK;
     }
+
     @PostMapping("/role")
     public HttpStatus postPerson(
             @RequestParam Long film_id,

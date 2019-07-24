@@ -5,7 +5,7 @@ import com.raven43.cinemaproject.model.messaging.Chat;
 import com.raven43.cinemaproject.model.messaging.Message;
 import com.raven43.cinemaproject.repo.UserRepo;
 import com.raven43.cinemaproject.services.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,19 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rest/im")
+@RequiredArgsConstructor
 public class MessageRestController {
 
     private final MessageService messageService;
     private final UserRepo userRepo;
-
-    @Autowired
-    public MessageRestController(
-            MessageService messageService,
-            UserRepo userRepo
-    ) {
-        this.messageService = messageService;
-        this.userRepo = userRepo;
-    }
 
     @GetMapping
     public Page<Chat> getChats(

@@ -7,9 +7,8 @@ import com.raven43.cinemaproject.model.Role;
 import com.raven43.cinemaproject.repo.FilmRepo;
 import com.raven43.cinemaproject.repo.PersonRepo;
 import com.raven43.cinemaproject.repo.RoleRepo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -19,39 +18,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class RoleMapper {
 
     private final ObjectMapper mapper = new ObjectMapper();
-    private final Logger log = LoggerFactory.getLogger(RoleMapper.class);
 
     private final RoleRepo roleRepo;
     private final FilmRepo filmRepo;
     private final PersonRepo personRepo;
 
-
-    @Autowired
-    public RoleMapper(
-            RoleRepo roleRepo,
-            FilmRepo filmRepo,
-            PersonRepo personRepo
-    ) {
-        this.roleRepo = roleRepo;
-        this.filmRepo = filmRepo;
-        this.personRepo = personRepo;
-    }
-
-    public Role getRole(Film film,RoleDTO dto){
+    public Role getRole(Film film, RoleDTO dto) {
 
         Person person = personRepo.findById(dto.getItemId()).orElseThrow();
-        return new Role(film,person,dto.getDescription());
-    }
-    public Role getRole(Person person,RoleDTO dto){
-
-        Film film= filmRepo.findById(dto.getItemId()).orElseThrow();
-        return new Role(film,person,dto.getDescription());
+        return new Role(film, person, dto.getDescription());
     }
 
-    public Film updateFilmRoles(Film film,String[] roles) throws IOException {
+    public Role getRole(Person person, RoleDTO dto) {
+
+        Film film = filmRepo.findById(dto.getItemId()).orElseThrow();
+        return new Role(film, person, dto.getDescription());
+    }
+
+    public Film updateFilmRoles(Film film, String[] roles) throws IOException {
 
         Set<Role> newRoles = new HashSet<>();
         Set<Role> oldRoles = roleRepo.getByFilm(film);
@@ -75,7 +64,8 @@ public class RoleMapper {
             }
         return filmRepo.save(film);
     }
-    public Person updatePersonRoles(Person person,String[] roles) throws IOException {
+
+    public Person updatePersonRoles(Person person, String[] roles) throws IOException {
 
         Set<Role> newRoles = new HashSet<>();
         Set<Role> oldRoles = roleRepo.getByPerson(person);

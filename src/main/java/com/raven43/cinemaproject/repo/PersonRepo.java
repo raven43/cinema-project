@@ -1,6 +1,5 @@
 package com.raven43.cinemaproject.repo;
 
-import com.raven43.cinemaproject.model.Film;
 import com.raven43.cinemaproject.model.Person;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

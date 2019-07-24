@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title>${title}</title>
 
-    <link rel="manifest" href="/static/manifest.json">
     <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/main.css" type="text/css">
 

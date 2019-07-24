@@ -17,6 +17,6 @@ public class NoSuchTopicException extends NoSuchElementException {
     }
 
     public NoSuchTopicException(Long id) {
-        super("Can not find topic "+id);
+        super("Can not find topic " + id);
     }
 }
