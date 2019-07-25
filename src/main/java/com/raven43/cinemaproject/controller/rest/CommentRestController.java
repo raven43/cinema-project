@@ -1,8 +1,8 @@
-package com.raven43.cinemaproject.controllers.rest;
+package com.raven43.cinemaproject.controller.rest;
 
-import com.raven43.cinemaproject.model.User;
 import com.raven43.cinemaproject.model.comment.Comment;
-import com.raven43.cinemaproject.services.CommentService;
+import com.raven43.cinemaproject.model.domain.User;
+import com.raven43.cinemaproject.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

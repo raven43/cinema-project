@@ -1,8 +1,8 @@
 package com.raven43.cinemaproject.repo;
 
-import com.raven43.cinemaproject.model.Film;
-import com.raven43.cinemaproject.model.Person;
-import com.raven43.cinemaproject.model.Role;
+import com.raven43.cinemaproject.model.domain.Film;
+import com.raven43.cinemaproject.model.domain.Person;
+import com.raven43.cinemaproject.model.domain.Role;
 
 import java.util.Set;
 

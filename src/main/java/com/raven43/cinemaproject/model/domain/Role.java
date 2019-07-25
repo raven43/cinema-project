@@ -1,4 +1,4 @@
-package com.raven43.cinemaproject.model;
+package com.raven43.cinemaproject.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

@@ -1,10 +1,10 @@
-package com.raven43.cinemaproject.controllers;
+package com.raven43.cinemaproject.controller;
 
-import com.raven43.cinemaproject.model.Film;
-import com.raven43.cinemaproject.model.Person;
-import com.raven43.cinemaproject.model.User;
-import com.raven43.cinemaproject.services.admin.ContentAdministrationService;
-import com.raven43.cinemaproject.services.admin.UserAdministrationService;
+import com.raven43.cinemaproject.model.domain.Film;
+import com.raven43.cinemaproject.model.domain.Person;
+import com.raven43.cinemaproject.model.domain.User;
+import com.raven43.cinemaproject.service.admin.ContentAdministrationService;
+import com.raven43.cinemaproject.service.admin.UserAdministrationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -42,6 +42,11 @@ public class AdminController {
         }
         modelAndView.setViewName("admin/film");
         return modelAndView;
+    }
+
+    @GetMapping("/v2/film")
+    public String getEditFilmPage() {
+        return "admin_v2/film";
     }
 
     @PostMapping("/film")

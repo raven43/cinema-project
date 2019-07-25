@@ -1,6 +1,6 @@
 package com.raven43.cinemaproject.model.messaging;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.model.domain.User;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;

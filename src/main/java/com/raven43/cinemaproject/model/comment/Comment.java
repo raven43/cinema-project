@@ -1,6 +1,6 @@
 package com.raven43.cinemaproject.model.comment;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.model.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;

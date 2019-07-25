@@ -1,10 +1,10 @@
-package com.raven43.cinemaproject.controllers.rest;
+package com.raven43.cinemaproject.controller.rest;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.model.domain.User;
 import com.raven43.cinemaproject.model.messaging.Chat;
 import com.raven43.cinemaproject.model.messaging.Message;
 import com.raven43.cinemaproject.repo.UserRepo;
-import com.raven43.cinemaproject.services.MessageService;
+import com.raven43.cinemaproject.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

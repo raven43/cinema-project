@@ -1,9 +1,9 @@
-package com.raven43.cinemaproject.controllers;
+package com.raven43.cinemaproject.controller;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.model.domain.User;
 import com.raven43.cinemaproject.repo.UserRepo;
-import com.raven43.cinemaproject.services.FileService;
-import com.raven43.cinemaproject.services.MessageService;
+import com.raven43.cinemaproject.service.FileService;
+import com.raven43.cinemaproject.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;

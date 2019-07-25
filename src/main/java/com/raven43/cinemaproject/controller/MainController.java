@@ -1,6 +1,6 @@
-package com.raven43.cinemaproject.controllers;
+package com.raven43.cinemaproject.controller;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.model.domain.User;
 import com.raven43.cinemaproject.repo.FilmRepo;
 import com.raven43.cinemaproject.repo.UserRepo;
 import lombok.RequiredArgsConstructor;

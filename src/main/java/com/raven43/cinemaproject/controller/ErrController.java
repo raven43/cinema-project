@@ -1,4 +1,4 @@
-package com.raven43.cinemaproject.controllers;
+package com.raven43.cinemaproject.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;

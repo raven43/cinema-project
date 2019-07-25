@@ -1,6 +1,6 @@
-package com.raven43.cinemaproject.services;
+package com.raven43.cinemaproject.service;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.model.domain.User;
 import com.raven43.cinemaproject.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

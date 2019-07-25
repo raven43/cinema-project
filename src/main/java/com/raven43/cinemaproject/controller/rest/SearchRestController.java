@@ -1,7 +1,7 @@
-package com.raven43.cinemaproject.controllers.rest;
+package com.raven43.cinemaproject.controller.rest;
 
-import com.raven43.cinemaproject.model.Film;
-import com.raven43.cinemaproject.model.Person;
+import com.raven43.cinemaproject.model.domain.Film;
+import com.raven43.cinemaproject.model.domain.Person;
 import com.raven43.cinemaproject.repo.FilmRepo;
 import com.raven43.cinemaproject.repo.PersonRepo;
 import lombok.RequiredArgsConstructor;

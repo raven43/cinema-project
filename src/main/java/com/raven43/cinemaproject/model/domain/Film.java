@@ -1,4 +1,4 @@
-package com.raven43.cinemaproject.model;
+package com.raven43.cinemaproject.model.domain;
 
 import com.raven43.cinemaproject.model.comment.Topic;
 import lombok.Data;

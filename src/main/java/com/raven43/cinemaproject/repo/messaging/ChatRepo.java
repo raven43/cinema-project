@@ -1,6 +1,6 @@
 package com.raven43.cinemaproject.repo.messaging;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.model.domain.User;
 import com.raven43.cinemaproject.model.messaging.Chat;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

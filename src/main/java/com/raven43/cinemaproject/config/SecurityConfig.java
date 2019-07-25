@@ -1,8 +1,9 @@
 package com.raven43.cinemaproject.config;
 
-import com.raven43.cinemaproject.services.UserService;
+import com.raven43.cinemaproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,10 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/file/**",
                         "/register",
                         "/static/**",
+                        "/templates/**",
                         "/webjars/**",
                         "/rest/**",
                         "/search/**"
                 ).permitAll()
+                .mvcMatchers(HttpMethod.POST, "/rest/admin/film")
+                .anonymous()
                 .antMatchers("/moder/**").hasAuthority("MODER")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest()

@@ -1,4 +1,4 @@
-package com.raven43.cinemaproject.services;
+package com.raven43.cinemaproject.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

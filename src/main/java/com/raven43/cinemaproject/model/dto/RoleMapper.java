@@ -1,9 +1,9 @@
 package com.raven43.cinemaproject.model.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.raven43.cinemaproject.model.Film;
-import com.raven43.cinemaproject.model.Person;
-import com.raven43.cinemaproject.model.Role;
+import com.raven43.cinemaproject.model.domain.Film;
+import com.raven43.cinemaproject.model.domain.Person;
+import com.raven43.cinemaproject.model.domain.Role;
 import com.raven43.cinemaproject.repo.FilmRepo;
 import com.raven43.cinemaproject.repo.PersonRepo;
 import com.raven43.cinemaproject.repo.RoleRepo;

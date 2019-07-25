@@ -1,6 +1,8 @@
-package com.raven43.cinemaproject.services.admin;
+package com.raven43.cinemaproject.service.admin;
 
-import com.raven43.cinemaproject.model.User;
+import com.raven43.cinemaproject.exception.NoSuchUserException;
+import com.raven43.cinemaproject.model.domain.User;
+import com.raven43.cinemaproject.model.request.UserUpdateRequest;
 import com.raven43.cinemaproject.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,12 @@ public class UserAdministrationService {
         else user.getRoles().remove(User.Role.MODER);
         if (adm) user.getRoles().add(User.Role.ADMIN);
         else user.getRoles().remove(User.Role.ADMIN);
+        return userRepo.save(user);
+    }
+
+    public User updateUser(UserUpdateRequest userUpdateRequest) {
+        User user = userRepo.findById(userUpdateRequest.getId()).orElseThrow(NoSuchUserException::new);
+        user.setRoles(userUpdateRequest.getRoles());
         return userRepo.save(user);
     }
 }

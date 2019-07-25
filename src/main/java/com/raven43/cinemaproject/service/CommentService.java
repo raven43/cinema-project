@@ -1,8 +1,8 @@
-package com.raven43.cinemaproject.services;
+package com.raven43.cinemaproject.service;
 
-import com.raven43.cinemaproject.model.User;
 import com.raven43.cinemaproject.model.comment.Comment;
 import com.raven43.cinemaproject.model.comment.Topic;
+import com.raven43.cinemaproject.model.domain.User;
 import com.raven43.cinemaproject.repo.comment.CommentRepo;
 import com.raven43.cinemaproject.repo.comment.TopicRepo;
 import lombok.RequiredArgsConstructor;
