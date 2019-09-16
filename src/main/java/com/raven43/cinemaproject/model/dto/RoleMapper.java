@@ -53,15 +53,18 @@ public class RoleMapper {
             }
         }
 
-        for (Role role : newRoles)
-            if (!oldRoles.contains(role))
+        for (Role role : newRoles) {
+            if (!oldRoles.contains(role)) {
                 film.getRoles().add(role);
+            }
+        }
 
-        for (Role role : oldRoles)
+        for (Role role : oldRoles) {
             if (!newRoles.contains(role)) {
                 film.getRoles().remove(role);
                 roleRepo.delete(role);
             }
+        }
         return filmRepo.save(film);
     }
 
@@ -77,15 +80,18 @@ public class RoleMapper {
             }
         }
 
-        for (Role role : newRoles)
-            if (!oldRoles.contains(role))
+        for (Role role : newRoles) {
+            if (!oldRoles.contains(role)) {
                 person.getRoles().add(role);
+            }
+        }
 
-        for (Role role : oldRoles)
+        for (Role role : oldRoles) {
             if (!newRoles.contains(role)) {
                 person.getRoles().remove(role);
                 roleRepo.delete(role);
             }
+        }
         return personRepo.save(person);
     }
 

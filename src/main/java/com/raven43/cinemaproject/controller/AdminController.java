@@ -10,7 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +30,8 @@ public class AdminController {
 
     private final ContentAdministrationService contentAdministrationService;
     private final UserAdministrationService userAdministrationService;
+
+    //todo separate endpoint for file uploading
 
     @GetMapping
     public String main() {
@@ -56,7 +62,6 @@ public class AdminController {
             @RequestParam(required = false) MultipartFile file,
             Model model
     ) {
-
         contentAdministrationService.updateOrCreateFilm(film, roles, file);
         model.addAttribute("message",
                 "Film <a class=\"alert-link\" href=\"/films/" + film.getId() +

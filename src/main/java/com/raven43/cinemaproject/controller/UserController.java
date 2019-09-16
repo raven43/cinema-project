@@ -1,18 +1,26 @@
 package com.raven43.cinemaproject.controller;
 
+import com.raven43.cinemaproject.exception.UserAlreadyExistException;
 import com.raven43.cinemaproject.model.domain.User;
+import com.raven43.cinemaproject.model.request.UserRegisterRequest;
 import com.raven43.cinemaproject.repo.UserRepo;
 import com.raven43.cinemaproject.service.FileService;
 import com.raven43.cinemaproject.service.MessageService;
+import com.raven43.cinemaproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -25,6 +33,27 @@ public class UserController {
     private final UserRepo userRepo;
     private final FileService fileService;
     private final MessageService messageService;
+    private final UserService userService;
+
+    @GetMapping("/register")
+    public String getRegisterPage() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerNewUser(
+            @Valid UserRegisterRequest user,
+            Model model
+    ) {
+        try {
+            userService.registerNewUser(user);
+            model.addAttribute("message", "Пользователь зарегистрирован");
+            return "redirect:/login";
+        } catch (UserAlreadyExistException e) {
+            model.addAttribute("message", "user exist!");
+            return "register";
+        }
+    }
 
     @GetMapping
     public String profile() {
@@ -37,15 +66,17 @@ public class UserController {
             @AuthenticationPrincipal User user,
             Model model
     ) {
-        User requaredUser = userRepo.findById(id).orElseThrow();
-        if (requaredUser.equals(user)) return "redirect:/profile";
-        model.addAttribute("item", requaredUser);
+        User requiredUser = userService.getUser(id);
+        if (requiredUser.getId().equals(user.getId())) {
+            return "redirect:/profile";
+        }
+        model.addAttribute("item", requiredUser);
         return "user/page";
     }
 
 
     @GetMapping("/edit")
-    public String profileEdit(
+    public String getProfileEditPage(
             @AuthenticationPrincipal User user,
             Model model
     ) {

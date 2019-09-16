@@ -1,5 +1,7 @@
 package com.raven43.cinemaproject.controller;
 
+import com.raven43.cinemaproject.exception.NoSuchFilmException;
+import com.raven43.cinemaproject.exception.NoSuchPersonException;
 import com.raven43.cinemaproject.model.domain.Film;
 import com.raven43.cinemaproject.model.domain.Person;
 import com.raven43.cinemaproject.model.domain.Role;
@@ -10,7 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -59,12 +65,10 @@ public class MainRestController {
             @RequestParam Long person_id,
             @Valid Role role
     ) {
-        role.setFilm(filmRepo.findById(film_id).get());
-        role.setPerson(personRepo.findById(person_id).get());
+        role.setFilm(filmRepo.findById(film_id).orElseThrow(NoSuchFilmException::new));
+        role.setPerson(personRepo.findById(person_id).orElseThrow(NoSuchPersonException::new));
         System.out.println(role);
         roleRepo.save(role);
         return HttpStatus.OK;
     }
-
-
 }
