@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/cinema_db?useSSL=false&serverTimezone=UTC}
+    username: ${DB_USERNAME:cinema_server}
+    password: ${DB_PASSWORD:Cinema123!}
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    show-sql: true
+  freemarker:
+    expose-request-attributes: true
+    expose-session-attributes: true
+    settings:
+      template_exception_handler: rethrow
+  servlet:
+    multipart:
+      max-file-size: 2MB
+server:
+  error:
+    whitelabel:
+      enabled:  false
+  jetty:
+    max-http-post-size: 2MB
+app:
+  upload:
+    path: ${UPLOAD_PATH:/cinema/files}

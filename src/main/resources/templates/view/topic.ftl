@@ -24,7 +24,7 @@
     </#if>
 
     <#if (page.totalPages>1)>
-        <@common.paggination "persons" page.number page.size page.totalPages></@common.paggination>
+        <@common.paggination_alt "persons" page></@common.paggination_alt>
     </#if>
 
         <ul class="list-group">
@@ -34,7 +34,7 @@
         </ul>
 
     <#if (page.totalPages>1)>
-        <@common.paggination "persons" page.number page.size page.totalPages></@common.paggination>
+        <@common.paggination_alt "persons" page></@common.paggination_alt>
     </#if>
 
 

@@ -18,7 +18,7 @@
     </div>
 
     <#if (page.totalPages>1)>
-        <@common.paggination "persons" page.number page.size page.totalPages></@common.paggination>
+        <@common.paggination_alt "persons" page></@common.paggination_alt>
     </#if>
     <ul class="list-group">
     <#list page.content as item>
@@ -26,7 +26,7 @@
     </#list>
     </ul>
     <#if (page.totalPages>1)>
-        <@common.paggination "persons" page.number page.size page.totalPages></@common.paggination>
+        <@common.paggination_alt "persons" page></@common.paggination_alt>
     </#if>
 
 </@common.page>

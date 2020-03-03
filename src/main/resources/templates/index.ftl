@@ -16,7 +16,11 @@
                             <h5 class="card-title">${item.name}</h5>
                             <p class="card-text">
                                 <#if item.description??>
-                                    ${item.description?substring(0,60)}
+                                    <#if (item.description?length>60)>
+                                        ${item.description?substring(0,60)}
+                                    <#else>
+                                        ${item.description}
+                                    </#if>
                                 </#if>
                             </p>
                             <p class="card-text">
