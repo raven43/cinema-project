@@ -16,9 +16,9 @@
                 <#if isAdmin>
                 <a class="nav-item nav-link" href="/admin">Administrate</a>
                 </#if>
-                <#if isModer>
-                <a class="nav-item nav-link disabled" href="/moder">Moderate</a>
-                </#if>
+<#--                <#if isModer>-->
+<#--                <a class="nav-item nav-link disabled" href="/moder">Moderate</a>-->
+<#--                </#if>-->
 
             <#if isAuthorize>
                 <a class="nav-item nav-link outline" href="/profile">

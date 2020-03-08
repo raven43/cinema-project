@@ -23,4 +23,4 @@ server:
     max-http-post-size: 2MB
 app:
   upload:
-    path: ${UPLOAD_PATH:/cinema/files}
+    path: ${UPLOAD_PATH:/cinema-project-files}
