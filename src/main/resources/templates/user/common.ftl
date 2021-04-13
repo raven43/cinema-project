@@ -9,9 +9,9 @@
                 <li class="nav-item">
                     <a class="nav-link${(tab==0)?string(" active","")}" href="/profile">Main</a>
                 </li>
-                <li class="nav-item disabled">
-                    <a class="nav-link${(tab==1)?string(" active","")}" href="/profile/im">Messages</a>
-                </li>
+<#--                <li class="nav-item disabled">-->
+<#--                    <a class="nav-link${(tab==1)?string(" active","")}" href="/profile/im">Messages</a>-->
+<#--                </li>-->
                 <li class="nav-item">
                     <a class="nav-link${(tab==2)?string(" active","")}" href="/profile/edit">Edit</a>
                 </li>

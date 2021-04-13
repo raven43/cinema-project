@@ -19,7 +19,7 @@
     </div>
 
     <#if (page.totalPages>1)>
-        <@common.paggination "films" page.number page.size page.totalPages></@common.paggination>
+        <@common.paggination_alt "films" page></@common.paggination_alt>
     </#if>
 
     <ul class="list-group">
@@ -29,7 +29,7 @@
     </ul>
 
     <#if (page.totalPages>1)>
-        <@common.paggination "films" page.number page.size page.totalPages></@common.paggination>
+        <@common.paggination_alt "films" page></@common.paggination_alt>
     </#if>
 
 </@common.page>
